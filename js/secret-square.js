@@ -4,20 +4,12 @@ $(document).ready(function() {
 	const columnCount = 18;
 
 	$("#refresh").click(function() {
-		showSquare((function() {
-			var row = Math.floor(Math.random() * rowCount);
+		var row = Math.floor(Math.random() * rowCount);
+		var column = Math.floor(Math.random() * columnCount) + 1;
 
-			return {
-				row: rowLetters.charAt(row),
-				column: Math.floor(Math.random() * columnCount) + 1
-			};
-		})());
+		$("#secret-row").html(rowLetters.charAt(row));
+		$("#secret-column").html(column);
 	});
 
 	$("#refresh").trigger("click");
 });
-
-function showSquare(square) {
-	$("#secret-row").html(square.row);
-	$("#secret-column").html(square.column);
-}
