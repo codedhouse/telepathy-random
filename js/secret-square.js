@@ -1,15 +1,23 @@
 $(document).ready(function() {
-	const rowCount = 18;
+	const rowLetters = "ABCDEFGHIJKLMNOPQR";
+	const rowCount = rowLetters.length;
 	const columnCount = 18;
 
-	var row = Math.floor(Math.random() * rowCount) + 1;
-	var column = Math.floor(Math.random() * columnCount) + 1;
-	var rowLetter = "_ABCDEFGHIJKLMNOPQR".charAt(row);
-
-	$("#secret-row").append(rowLetter);
-	$("#secret-column").append(column);
-
 	$("#refresh").click(function() {
-		location.reload();
+		showSquare((function() {
+			var row = Math.floor(Math.random() * rowCount);
+
+			return {
+				row: rowLetters.charAt(row),
+				column: Math.floor(Math.random() * columnCount) + 1
+			};
+		})());
 	});
+
+	$("#refresh").trigger("click");
 });
+
+function showSquare(square) {
+	$("#secret-row").html(square.row);
+	$("#secret-column").html(square.column);
+}
